@@ -1,0 +1,16 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+ name: jenkins-hpa
+spec:
+scaleTargetRef:
+apiVersion: apps/v1
+kind: Deployment
+name: jenkins-deploy
+minReplicas: 1
+maxReplicas: 3
+metrics:
+- type: Resource
+resource:
+name: cpu
+targetAverageUtilization: 50
